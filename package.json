@@ -16,11 +16,10 @@
     "jsonwebtoken": "^8.5.1",
     "jwk-to-pem": "^2.0.1",
     "knex": "^0.19.2",
+    "logdna": "^3.3.0",
     "morgan": "~1.9.1",
     "pg": "^7.12.0",
-    "pg-hstore": "^2.3.3",
-    "pino": "^5.13.2",
-    "pm2": "^3.5.1"
+    "pg-hstore": "^2.3.3"
   },
   "devDependencies": {
     "nodemon": "^1.19.1",
