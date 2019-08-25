@@ -1,16 +1,31 @@
 "use strict";
-const Sequelize = require("sequelize");
-let sequalize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB.USER,
-  process.env.DB_PASSS,
-  {
-    dialect: "postgres",
+
+const secrets = require('../../utils/secrets');
+
+const PG_URL=secrets('DB_URL');
+const PG_PORT=secrets('DB_PORT');
+const PG_DATABASE=secrets('DB_DATABASE');
+const PG_USER=secrets('DB_USER');
+const PG_PWD=secrets('DB_PWD');
+
+const knex = require('knex')({
+    client: 'pg',
+    connection: {
+        host: PG_URL,
+        port: PG_PORT,
+        database: PG_DATABASE,
+        user: PG_USER,
+        password: PG_PWD,
+    },
     pool: {
-      max: 5,
-      min: 2,
-      acquire: 30000,
-      idle: 10000
+        min: 2,
+        max: 3
     }
-  }
-);
+});
+
+knex.on('disconnect', err => {
+    console.log(err);
+    throw err;
+})
+
+module.exports = {knex: knex};
