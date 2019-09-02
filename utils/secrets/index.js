@@ -7,7 +7,7 @@ const getValue = key => {
     if (process.env[key]) {
       return process.env[key];
     } else {
-      throw new Error("Environment variable does not exist");
+      throw new Error(`Environment variable ${key} does not exist`);
     }
   }
   return value;
