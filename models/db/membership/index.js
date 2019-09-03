@@ -24,64 +24,56 @@ const del = (email, register_id) => {
     .del();
 }
 
-const addMember = (admin_email, user_email, register_id) => {
-  return isMember(user_email, register_id)
-    .then((member) => {
+const addMember = (admin_email, user_email, register_id, callback) => {
+  isMember(user_email, register_id,
+    (member) => {
       if (!member) {
-        return isAdmin(admin_email, register_id)
-          .then((admin) => {
+        return isAdmin(admin_email, register_id, 
+          (admin) => {
             if (admin) {
-              return create(user_email, register_id, false);
+              callback(create(user_email, register_id, false));
             }
-
-            return false;
-          });
+            callback(false);
+          })
       }
-      return false;
+      callback(false);
     });
 }
 
-const isMember = (email, register_id) => {
-  return read(email, register_id)
+const isMember = (email, register_id, callback) => {
+  read(email, register_id)
     .then((data) => {
-      return !!data;
+      return callback(!!data);
     });
 }
 
-const isAdmin = (email, register_id) => {
+const isAdmin = (email, register_id, callback) => {
   return read(email, register_id)
     .then((data) => {
-      if (!data) {
-        return false;
-      }
-
-      return data[0]['is_admin'];
-    });;
+      return callback(!data || data[0]['is_admin']);
+    });
 }
 
-const modifyAdmin = (admin_email, user_email, register_id, is_admin) => {
-  return isMember(user_email, register_id)
-    .then((member) => {
+const modifyAdmin = (admin_email, user_email, register_id, is_admin, callback) => {
+  isMember(user_email, register_id, 
+    (member) => {
       if (member && admin_email !== user_email) {
-        return isAdmin(admin_email, register_id)
-          .then((admin) => {
+        isAdmin(admin_email, register_id, 
+          (admin) => {
             if (admin) {
-              return update(user_email, register_id, is_admin);
+              callback(update(user_email, register_id, is_admin));
             }
-
-            return false;
-          });
+          })
       }
-      return false;
     });
 }
 
-const promote = (admin_email, user_email, register_id) => {
-  return modifyAdmin(admin_email, user_email, register_id, true);
+const promote = (admin_email, user_email, register_id, callback) => {
+  modifyAdmin(admin_email, user_email, register_id, true, callback);
 }
 
-const demote = (admin_email, user_email, register_id) => {
-  return modifyAdmin(admin_email, user_email, register_id, false);
+const demote = (admin_email, user_email, register_id, callback) => {
+  modifyAdmin(admin_email, user_email, register_id, false, callback);
 }
 
 module.exports = { create, read, del, addMember, isAdmin, isMember, promote, demote };
