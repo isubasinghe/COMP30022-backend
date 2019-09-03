@@ -9,7 +9,6 @@ const create = (email, register_id, is_admin) => {
 
 const read = (email, register_id) => {
   return db.knex('membership')
-    .select()
     .where({ email, register_id });
 }
 
@@ -25,4 +24,64 @@ const del = (email, register_id) => {
     .del();
 }
 
-module.exports = { create, read, update, del };
+const addMember = (admin_email, user_email, register_id) => {
+  return isMember(user_email, register_id)
+    .then((member) => {
+      if (!member) {
+        return isAdmin(admin_email, register_id)
+          .then((admin) => {
+            if (admin) {
+              return create(user_email, register_id, false);
+            }
+
+            return false;
+          });
+      }
+      return false;
+    });
+}
+
+const isMember = (email, register_id) => {
+  return read(email, register_id)
+    .then((data) => {
+      return !!data;
+    });
+}
+
+const isAdmin = (email, register_id) => {
+  return read(email, register_id)
+    .then((data) => {
+      if (!data) {
+        return false;
+      }
+
+      return data[0]['is_admin'];
+    });;
+}
+
+const modifyAdmin = (admin_email, user_email, register_id, is_admin) => {
+  return isMember(user_email, register_id)
+    .then((member) => {
+      if (member && admin_email !== user_email) {
+        return isAdmin(admin_email, register_id)
+          .then((admin) => {
+            if (admin) {
+              return update(user_email, register_id, is_admin);
+            }
+
+            return false;
+          });
+      }
+      return false;
+    });
+}
+
+const promote = (admin_email, user_email, register_id) => {
+  return modifyAdmin(admin_email, user_email, register_id, true);
+}
+
+const demote = (admin_email, user_email, register_id) => {
+  return modifyAdmin(admin_email, user_email, register_id, false);
+}
+
+module.exports = { create, read, del, addMember, isAdmin, isMember, promote, demote };
