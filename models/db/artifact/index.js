@@ -10,6 +10,8 @@ const create = (email, register_id, name, family_members, description, date, lat
         return db.knex('artifact')
           .insert({ register_id, name, family_members, description, date, lat, lon });
       }
+
+      return new Error('member is not an admin, or register does not exist');
     });
 }
 
@@ -20,17 +22,17 @@ const read = (email, register_id, artifact_id) => {
 
 const readAll = (email, register_id) => {
   return db.knex('artifact')
-  .leftOuterJoin('photo', 'artifact.artifact_id', 'photo.artifact_id')
-  .select(
-    'artifact.*',
-    db.knex.raw('json_agg(photo.*) as photos') 
-  )    
-  .groupBy('artifact.artifact_id')
-  .whereIn('register_id', function() {
-    this.select('register_id')
-      .from('membership')
-      .where({ email, register_id })
-  });
+    .leftOuterJoin('photo', 'artifact.artifact_id', 'photo.artifact_id')
+    .select(
+      'artifact.*',
+      db.knex.raw('json_agg(photo.*) as photos') 
+    )    
+    .groupBy('artifact.artifact_id')
+    .whereIn('register_id', function() {
+      this.select('register_id')
+        .from('membership')
+        .where({ email, register_id })
+    });
 }
 
 const update = (email, register_id, artifact_id, name, family_members, description, date, lat, lon) => {   

@@ -12,6 +12,8 @@ const create = (email, register_id, artifact_id, url) => {
         return db.knex('photo')
           .insert({ artifact_id, url });
       }
+
+      return new Error('member is not an admin, register does not exist, or artifact does not exist');
     });
 }
 
