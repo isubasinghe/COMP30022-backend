@@ -23,9 +23,14 @@ const update = (admin_email, email, register_id, is_admin) => {
     });
 }
 
-const del = (email, register_id) => {
+const del = (admin_email, email, register_id) => {
   return db.knex('membership')
     .where({ email, register_id })
+    .whereExists(function() {
+      this.select()
+        .from('membership')
+        .where({'email': admin_email, register_id, 'is_admin': true })
+    })
     .del();
 }
 
