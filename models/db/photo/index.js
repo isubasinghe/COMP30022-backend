@@ -2,21 +2,42 @@
 
 const db = require('../../db');
 
-const create = (artifact_id, url) => {
+const create = (email, register_id, artifact_id, url) => {
   return db.knex('membership')
-    .insert({ artifact_id, url });
+    .join('artifact', 'artifact.register_id', 'membership.register_id')
+    .where({ email, is_admin: true })
+    .where('artifact.register_id', register_id)
+    .then((data) => {
+      if (data && data.length !== 0) {
+        return db.knex('photo')
+          .insert({ artifact_id, url });
+      }
+    });
 }
 
-const read = (artifact_id) => {
+const read = (email, register_id, artifact_id) => {
   return db.knex('photo')
-    .where({ artifact_id });
+    .where({ artifact_id })
+    .whereIn('artifact_id', function() {
+      this.select('artifact_id')
+        .from('membership')
+        .join('artifact', 'artifact.register_id', 'membership.register_id')
+        .where({ email, is_admin: true })
+        .where('artifact.register_id', register_id)
+    });
 }
 
-const del = (artifact_id, url) => {
-  return db.knex('membership')
+const del = (email, register_id, artifact_id, url) => {
+  return db.knex('photo')
     .where({ artifact_id, url })
+    .whereIn('artifact_id', function() {
+      this.select('artifact_id')
+        .from('membership')
+        .join('artifact', 'artifact.register_id', 'membership.register_id')
+        .where({ email, is_admin: true })
+        .where('artifact.register_id', register_id)
+    })
     .del();
 }
-
 
 module.exports = { create, read, del };
