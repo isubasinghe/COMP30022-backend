@@ -12,10 +12,15 @@ const read = (email, register_id) => {
     .where({ email, register_id });
 }
 
-const update = (email, register_id, is_admin) => {
+const update = (admin_email, email, register_id, is_admin) => {
   return db.knex('membership')
     .where({ email, register_id })
-    .update({ is_admin });
+    .update({ is_admin })
+    .whereExists(function() {
+      this.select()
+        .from('membership')
+        .where({'email': admin_email, register_id, 'is_admin': true })
+    });
 }
 
 const del = (email, register_id) => {
@@ -24,56 +29,14 @@ const del = (email, register_id) => {
     .del();
 }
 
-const addMember = (admin_email, user_email, register_id, callback) => {
-  isMember(user_email, register_id,
-    (member) => {
-      if (!member) {
-        return isAdmin(admin_email, register_id, 
-          (admin) => {
-            if (admin) {
-              callback(create(user_email, register_id, false));
-            }
-            callback(false);
-          })
-      }
-      callback(false);
-    });
-}
-
-const isMember = (email, register_id, callback) => {
-  read(email, register_id)
+const addMember = (admin_email, user_email, register_id) => {
+  return db.knex('membership')
+    .where({ 'email': admin_email, register_id, 'is_admin': true })
     .then((data) => {
-      return callback(!!data);
-    });
-}
-
-const isAdmin = (email, register_id, callback) => {
-  return read(email, register_id)
-    .then((data) => {
-      return callback(!data || data[0]['is_admin']);
-    });
-}
-
-const modifyAdmin = (admin_email, user_email, register_id, is_admin, callback) => {
-  isMember(user_email, register_id, 
-    (member) => {
-      if (member && admin_email !== user_email) {
-        isAdmin(admin_email, register_id, 
-          (admin) => {
-            if (admin) {
-              callback(update(user_email, register_id, is_admin));
-            }
-          })
+      if (data) {
+        return create(user_email, register_id, false);
       }
     });
 }
 
-const promote = (admin_email, user_email, register_id, callback) => {
-  modifyAdmin(admin_email, user_email, register_id, true, callback);
-}
-
-const demote = (admin_email, user_email, register_id, callback) => {
-  modifyAdmin(admin_email, user_email, register_id, false, callback);
-}
-
-module.exports = { create, read, del, addMember, isAdmin, isMember, promote, demote };
+module.exports = { create, read, update, del, addMember };
