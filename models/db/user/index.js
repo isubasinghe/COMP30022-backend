@@ -2,6 +2,11 @@
 
 const db = require('../../db');
 
+const create = (email, name) => {
+  return db.knex('userdata')
+    .insert({ email, name });
+}
+
 const read = (email) => {
   return db.knex('userdata')
     .select()
@@ -14,4 +19,10 @@ const update = (email, name) => {
     .update({ name });
 }
 
-module.exports = { read, update };
+const del = (email) => {
+  return db.knex('userdata')
+    .where({ email })
+    .del();
+}
+
+module.exports = { create, read, update, del };
