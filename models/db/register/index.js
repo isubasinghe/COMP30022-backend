@@ -1,16 +1,28 @@
 "use strict";
 
 const db = require('../../db');
+const membership = require('../membership');
 
-const create = (register_id, name) => {
+const create = (email, name) => {
   return db.knex('register')
-    .insert({ register_id, name });
+    .insert({ name })
+    .returning('register_id')
+    .then((data) => {
+      const register_id = data[0];
+
+      return membership.create(email, register_id, true);
+    });
 }
 
-const update = (register_id, name) => {
+const update = (email, register_id, name) => {
   return db.knex('register')
+    .update({ name })
     .where({ register_id })
-    .update({ name });
+    .whereIn('register_id', function() {
+      this.select('register_id')
+        .from('membership')
+        .where({ email, is_admin: true})
+    });
 }
 
 const read = (register_id) => {
@@ -21,15 +33,22 @@ const read = (register_id) => {
 
 const readUserRegisters = (email) => {
   return db.knex('register')
-    .join('membership', 'register.register_id', 'membership.register_id')
-    .join('userdata', 'userdata.email', 'membership.email')
-    .select('register.*')
-    .where({ email });
+    .select()
+    .whereIn('register_id', function() {
+      this.select('register_id')
+        .from('membership')
+        .where({ email })
+    });
 }
 
-const del = (register_id) => {
+const del = (email, register_id) => {
   return db.knex('register')
     .where({ register_id })
+    .whereIn('register_id', function() {
+      this.select('register_id')
+        .from('membership')
+        .where({ email, is_admin: true})
+    })
     .del();
 }
 
