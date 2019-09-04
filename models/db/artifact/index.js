@@ -38,7 +38,7 @@ const readAll = (email, register_id) => {
 const update = (email, register_id, artifact_id, name, family_members, description, date, lat, lon) => {   
   return db.knex('artifact') 
     .update({ name, family_members, description, date, lat, lon })
-    .where({ artifact_id })
+    .where({ artifact_id, register_id })
     .whereExists(function() {
       this.select()
         .from('membership')
@@ -48,7 +48,7 @@ const update = (email, register_id, artifact_id, name, family_members, descripti
 
 const del = (email, register_id, artifact_id) => {
   return db.knex('artifact')
-    .where({ artifact_id })
+    .where({ artifact_id, register_id })
     .whereExists(function() {
       this.select()
         .from('membership')
