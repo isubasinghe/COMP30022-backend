@@ -37,8 +37,11 @@ const del = (admin_email, email, register_id) => {
 const addMember = (admin_email, user_email, register_id) => {
   return db.knex('membership')
     .where({ 'email': admin_email, register_id, 'is_admin': true })
+    .returning('is_admin')
     .then((data) => {
-      if (data) {
+      const is_admin = data[0];
+      
+      if (is_admin) {
         return create(user_email, register_id, false);
       }
     });
