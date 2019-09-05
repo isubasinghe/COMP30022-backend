@@ -24,7 +24,7 @@ const read = (email, register_id, artifact_id) => {
       this.select('artifact_id')
         .from('membership')
         .join('artifact', 'artifact.register_id', 'membership.register_id')
-        .where({ email, is_admin: true })
+        .where({ email })
         .where('artifact.register_id', register_id)
     });
 }
