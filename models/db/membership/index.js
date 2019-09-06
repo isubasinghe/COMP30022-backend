@@ -1,6 +1,6 @@
 "use strict";
 
-const db = require('../../db');
+const db = require('../conn');
 
 const create = (email, register_id, is_admin) => {
   return db.knex('membership')
