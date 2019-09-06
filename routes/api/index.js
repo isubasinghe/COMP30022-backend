@@ -5,9 +5,6 @@ const v1 = require("./v1");
 const authMiddleware = require("../../middleware/auth");
 
 router.use(authMiddleware);
-router.get("/", (req, res) => {
-  res.send("Hello");
-});
 router.use("/v1", v1);
 
 module.exports = router;
