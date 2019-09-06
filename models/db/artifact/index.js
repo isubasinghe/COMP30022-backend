@@ -25,7 +25,7 @@ const readAll = (email, register_id) => {
     .leftOuterJoin('photo', 'artifact.artifact_id', 'photo.artifact_id')
     .select(
       'artifact.*',
-      db.knex.raw('json_agg(photo.*) as photos') 
+      db.knex.raw('coalesce(json_agg(photo.*) filter (where photo is not null), \'[]\') as photos') 
     )    
     .groupBy('artifact.artifact_id')
     .whereIn('register_id', function() {
