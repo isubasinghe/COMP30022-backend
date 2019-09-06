@@ -1,6 +1,6 @@
 "use strict";
 
-const db = require('../../db');
+const db = require('../conn');
 const membership = require('../membership');
 
 const create = (email, name) => {
