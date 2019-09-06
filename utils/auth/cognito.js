@@ -55,6 +55,8 @@ const getUser = async idToken => {
     return new Error("The issuer is not correct");
   }
 
+  console.log(claims);
+
   return claims.email;
 };
 
