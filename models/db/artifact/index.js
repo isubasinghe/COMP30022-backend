@@ -23,16 +23,15 @@ const read = (email, register_id, artifact_id) => {
 const readAll = (email, register_id) => {
   return db.knex('artifact')
     .leftOuterJoin('photo', 'artifact.artifact_id', 'photo.artifact_id')
+    .join('membership', 'artifact.register_id', 'membership.register_id')
     .select(
       'artifact.*',
+      'membership.is_admin',
       db.knex.raw('coalesce(json_agg(photo.*) filter (where photo is not null), \'[]\') as photos') 
-    )    
-    .groupBy('artifact.artifact_id')
-    .whereIn('register_id', function() {
-      this.select('register_id')
-        .from('membership')
-        .where({ email, register_id })
-    });
+    )
+    .groupBy('artifact.artifact_id', 'membership.register_id', 'membership.email')
+    .where('membership.email', email)
+    .where('artifact.register_id', register_id);
 }
 
 const update = (email, register_id, artifact_id, name, family_members, description, date, lat, lon) => {   
