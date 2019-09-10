@@ -1,7 +1,9 @@
 "use strict";
 
 const router = require("express").Router();
-const register = require("./register");
-router.use("/register", register);
+const registerRouter = require("./register");
+const artifactRouter = require("./artifact");
+router.use("/register", registerRouter);
+router.use("/artifact", artifactRouter);
 
 module.exports = router;
