@@ -9,6 +9,8 @@ const updateMember = require("./membershipupdate");
 router.get("/all/:registerId", retriveArtifacts);
 router.get("/artifact/:registerId/:artifactId", retrieveArtifact);
 
+router.post("/addregister", addRegister);
+
 router.post("/addmember", addMember);
 router.post("/delmember", delMember);
 router.post("/updatemember", updateMember);
