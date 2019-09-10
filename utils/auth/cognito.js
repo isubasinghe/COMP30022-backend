@@ -41,6 +41,10 @@ const getUser = async idToken => {
 
   const currentTime = Math.floor(new Date() / 1000);
 
+  if (claims.email_verified !== true) {
+    return new Error("User is not verified, please confirm your email");
+  }
+
   if (currentTime > claims.exp) {
     return new Error("Token has expired");
   }
@@ -50,6 +54,8 @@ const getUser = async idToken => {
   if (ISS !== claims.iss) {
     return new Error("The issuer is not correct");
   }
+
+  console.log(claims);
 
   return claims.email;
 };

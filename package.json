@@ -1,12 +1,13 @@
 {
   "name": "comp30022-backend",
-  "version": "0.1.1",
+  "version": "0.2.4",
   "private": true,
   "scripts": {
     "dev": "nodemon ./bin/www",
     "prod": "node ./bin/www"
   },
   "dependencies": {
+    "cloudinary": "^1.14.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.0.0",
