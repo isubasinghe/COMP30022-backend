@@ -1,6 +1,6 @@
 "use strict";
 const router = require("express").Router();
-const authMiddleware = require('../middleware/auth');
+const authMiddleware = require("../middleware/auth");
 
 const api = require("./api");
 
