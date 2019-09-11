@@ -6,7 +6,7 @@ const addRegister = (req, res) => {
   [name]
   .forEach(element => {
     if (element === undefined) {
-      res.send({ message: "incorrect schema"});
+      status(400).json({ error: "incorrect schema" });   
       return;
     }
   });
@@ -18,8 +18,11 @@ const addRegister = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res.send(err);
+      res.status(400).json({ error: err.message });
     });
+
+       
+  return;
 }
 
 module.exports = addRegister;
