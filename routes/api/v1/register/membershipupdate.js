@@ -6,7 +6,7 @@ const membershipUpdate = (req, res) => {
   [email, register_id, is_admin]
   .forEach(element => {
     if (element === undefined) {
-      res.send({ message: "incorrect schema"});
+      status(400).json({ error: "incorrect schema" });      
       return;
     }
   });

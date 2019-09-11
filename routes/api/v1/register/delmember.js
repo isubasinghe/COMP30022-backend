@@ -6,7 +6,7 @@ const delMember = (req, res) => {
   [email, register_id]
   .forEach(element => {
     if (element === undefined) {
-			res.send({ message: "incorrect schema"});
+      status(400).json({ error: "incorrect schema" });      
 			return;
     }
   });
