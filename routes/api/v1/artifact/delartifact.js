@@ -14,7 +14,7 @@ const delArtifact = (req, res) => {
   req.app.locals.db.artifact
     .del(res.locals.authenticatedEmail, register_id, artifact_id)
     .then(() => {
-      res.status(200).json({ message: "successfully added artifact"});
+      res.status(200).json({ message: "successfully deleted artifact"});
     })
     .catch(err => {
       console.log(err);
