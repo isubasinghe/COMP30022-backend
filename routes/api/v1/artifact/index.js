@@ -5,5 +5,6 @@ const delArtifact = require("./delartifact");
 
 router.post("/add", addArtifact);
 router.post("/del", delArtifact);
+router.post("/update", delArtifact);
 
 module.exports = router;
