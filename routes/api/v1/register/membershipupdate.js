@@ -18,7 +18,7 @@ const membershipUpdate = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res.send(err);
+      res.status(400).json({ error: err.message });
     });
 }
 
