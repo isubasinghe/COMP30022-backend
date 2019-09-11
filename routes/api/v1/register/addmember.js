@@ -18,7 +18,7 @@ const addMember = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res.send(400).json({ error: err.message });
+      res.status(400).json({ error: err.message });
     });
 }
 
