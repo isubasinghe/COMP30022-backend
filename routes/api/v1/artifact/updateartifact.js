@@ -6,7 +6,7 @@ const updateArtifact = (req, res) => {
   [register_id, artifact_id, name, family_members, description, date, lat, lon]
   .forEach(element => {
     if (element === undefined) {
-      res.send({ message: "incorrect schema"});
+      status(400).json({ error: "incorrect schema" });
       return;
     }
   });

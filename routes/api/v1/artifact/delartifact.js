@@ -5,8 +5,8 @@ const delArtifact = (req, res) => {
 
   [register_id, artifact_id]
   .forEach(element => {
-    if (element === undefined) {
-      res.send({ message: "incorrect schema"});
+    if (element === undefined) {      
+      status(400).json({ error: "incorrect schema" });
       return;
     }
   });
