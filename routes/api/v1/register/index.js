@@ -5,7 +5,7 @@ const retrieveArtifact = require("./retrieveartifact");
 const addMember = require("./addmember");
 const delMember = require("./delmember");
 const updateMember = require("./membershipupdate");
-const addRegister = require("./addregiser");
+const addRegister = require("./addregister");
 
 router.get("/all/:registerId", retriveArtifacts);
 router.get("/artifact/:registerId/:artifactId", retrieveArtifact);
