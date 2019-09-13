@@ -12,7 +12,7 @@ const retrieveArtifacts = (req, res) => {
   req.app.locals.db.artifact
     .readAll(res.locals.authenticatedEmail, registerId)
     .then(data => {
-      res.send({ ...data, register_id: registerId });
+      res.status(200).json({ artifacts: data });
     })
     .catch(err => {
       console.log(err);
