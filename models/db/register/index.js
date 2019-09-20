@@ -33,12 +33,9 @@ const read = (register_id) => {
 
 const readUserRegisters = (email) => {
   return db.knex('register')
-    .select()
-    .whereIn('register_id', function() {
-      this.select('register_id')
-        .from('membership')
-        .where({ email })
-    });
+    .select('register.*', 'membership.is_admin')
+    .join('membership', 'register.register_id', 'membership.register_id')
+    .where('membership.email', email);
 }
 
 const del = (email, register_id) => {
