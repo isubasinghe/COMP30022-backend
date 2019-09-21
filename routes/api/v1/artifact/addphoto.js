@@ -43,23 +43,39 @@ const addPhoto = (req, res) => {
         .json({ error: "artifactId to add a photo to must be supplied" });
       return;
     }
-    const email = sha256("subasingheisitha@gmail.com");
+    if (req.body.registerId === undefined || req.body.registerId === null) {
+      res
+        .status(402)
+        .json({ error: "registerId to add a photo must be supplied" });
+      return;
+    }
+    let { artifactId, registerId } = req.body;
+    try {
+      artifactId = parseInt(artifactId);
+      registerId = parseInt(registerId);
+    } catch (err) {
+      res.status(402).json({ error: "unable to parse integer " });
+      return;
+    }
+
+    const email = sha256(res.authenticatedEmail);
     const fileHash = sha256(req.file.buffer);
-    console.log(req.file.buffer);
+    let uploadedUrl = "";
     uploadStream(req.file.buffer, { public_id: `${email}-${fileHash}` })
       .then(result => {
         return result.secure_url;
       })
       .then(url => {
+        uploadedUrl = url;
         return req.app.locals.db.photo.create(
-          "subasingheisitha@gmail.com",
-          8,
-          21,
+          res.authenticatedEmail,
+          registerId,
+          artifactId,
           url
         );
       })
       .then(result => {
-        res.status(200).json(result);
+        res.status(200).json({ message: "created url", url: uploadedUrl });
       })
       .catch(err => {
         res.status(500).json({ error: err.message });
