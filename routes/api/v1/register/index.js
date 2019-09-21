@@ -10,7 +10,7 @@ const addRegister = require("./addregister");
 
 router.get("/all/:registerId", retriveArtifacts);
 router.get("/artifact/:registerId/:artifactId", retrieveArtifact);
-router.get("/registers/", registers);
+router.get("/", registers);
 
 router.post("/addregister", addRegister);
 
