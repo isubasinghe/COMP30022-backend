@@ -3,8 +3,8 @@
 const registers = (req, res) => {
   req.app.locals.db.register
     .readUserRegisters(res.locals.authenticatedEmail)
-    .then(() => {
-        res.status(200).json({ ... data});
+    .then(data => {
+      res.status(200).json({ ... data});
     })
     .catch(err => {
       console.log(err);
