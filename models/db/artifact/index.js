@@ -8,7 +8,8 @@ const create = (email, register_id, name, family_members, description, date, lat
     .then((data) => {
       if (data && data.length !== 0) {
         return db.knex('artifact')
-          .insert({ register_id, name, family_members, description, date, lat, lon });
+          .insert({ register_id, name, family_members, description, date, lat, lon })
+          .returning('artifact_id');
       }
 
       return new Error('member is not an admin, or register does not exist');
