@@ -68,7 +68,7 @@ const addPhoto = (req, res) => {
       .then(url => {
         uploadedUrl = url;
         return req.app.locals.db.photo.create(
-          res.authenticatedEmail,
+          res.locals.authenticatedEmail,
           registerId,
           artifactId,
           url
