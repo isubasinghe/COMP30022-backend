@@ -58,7 +58,7 @@ const addPhoto = (req, res) => {
       return;
     }
 
-    const email = sha256(res.authenticatedEmail);
+    const email = sha256(res.locals.authenticatedEmail);
     const fileHash = sha256(req.file.buffer);
     let uploadedUrl = "";
     uploadStream(req.file.buffer, { public_id: `${email}-${fileHash}` })
