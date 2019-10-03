@@ -6,3 +6,6 @@ patch:
   SNYK-JS-HTTPSPROXYAGENT-469131:
     - '@sentry/node > https-proxy-agent':
         patched: '2019-10-03T21:21:05.972Z'
+  'npm:uglify-js:20151024':
+    - jade > transformers > uglify-js:
+        patched: '2019-10-03T21:56:46.690Z'
