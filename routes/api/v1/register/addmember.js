@@ -6,7 +6,7 @@ const addMember = (req, res) => {
   [email, register_id]
   .forEach(element => {
     if (element === undefined) {
-      status(400).json({ error: "incorrect schema" });
+      res.status(400).json({ error: "incorrect schema" });
       return;
     }
   });
