@@ -6,7 +6,7 @@ const addRegister = (req, res) => {
   [name]
   .forEach(element => {
     if (element === undefined) {
-      status(400).json({ error: "incorrect schema" });   
+      res.status(400).json({ error: "incorrect schema" });   
       return;
     }
   });
