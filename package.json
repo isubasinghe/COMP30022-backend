@@ -31,7 +31,7 @@
     "snyk": "^1.230.5"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1",
+    "nodemon": "^1.19.3",
     "sqlite3": "^4.1.0"
   },
   "snyk": true
