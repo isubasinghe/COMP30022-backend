@@ -2604,10 +2604,10 @@ lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
-logdna@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/logdna/-/logdna-3.3.0.tgz#b517c9550f62784184ffe4f9ddc0a3fb335aab16"
-  integrity sha512-NLxcLiLGwSML3WgxYkr8LC6zZgIPp41kqu3Zu1Gl5Dm2zv0kntDEj06peFpFd+RMxvAyXb7+QCbn6MegGFWWBg==
+logdna@^3.3.3:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/logdna/-/logdna-3.3.3.tgz#d539c0524ea629898926fdb0027b0723f28bbdbe"
+  integrity sha512-WNPdQt4Q+R/WPFoGIHDauWh/5CpFdFdYuH6u6lrOtFrZIPL8PBUE9+H5DB8QmjlGk/3cT/YXaE+zzfPPyqFLiA==
   dependencies:
     agentkeepalive "^2.2.0"
     axios "^0.19.0"
@@ -3794,6 +3794,16 @@ semver@4.3.2:
   integrity sha1-x6BxWKgL7dBSNVt3DYLWZA+AO+c=
 
 semver@^5.0.3, semver@^5.1.0, semver@^5.3.0, semver@^5.5.0, semver@^5.5.1, semver@^5.6.0:
+  version "5.7.1"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.1.tgz#a954f931aeba508d307bbf069eff0c01c96116f7"
+  integrity sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==
+
+semver@^6.0.0, semver@^6.1.0, semver@^6.1.2:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
+  integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
+
+semver@^5.5.1:
   version "5.7.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.1.tgz#a954f931aeba508d307bbf069eff0c01c96116f7"
   integrity sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==
