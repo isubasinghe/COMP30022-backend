@@ -27,7 +27,6 @@ function uploadStream(fileBuffer, options) {
 }
 
 const addPhoto = (req, res) => {
-  res.locals.authenticatedEmail = "subaasdasdasdasdsiasdasdnghasd";
   upload(req, res, err => {
     if (err) {
       return res.status(500).json({ error: err.message });
