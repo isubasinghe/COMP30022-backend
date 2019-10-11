@@ -1,11 +1,10 @@
-const winston = require("winston");
+const logdna = require('logdna');
+const options = {
+    env: process.env.NODE_ENV
+}
 
-const secrets = require("../secrets");
+const logger = logdna.createLogger(process.env.LOGDNA_INGESTION_KEY, options);
 
-require("winston-papertrail").Papertrail;
-const logger = new winston.transports.Papertrail({
-  host: secrets("PAPER_TRAIL_HOST"),
-  port: parseInt(secrets("PAPER_TRAIL_PORT")),
-  handleExceptions: true
-});
+
+
 module.exports = logger;
