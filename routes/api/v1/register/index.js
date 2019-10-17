@@ -7,12 +7,14 @@ const addMember = require("./addmember");
 const delMember = require("./delmember");
 const updateMember = require("./membershipupdate");
 const addRegister = require("./addregister");
+const delRegister = require("./delregister");
 
 router.get("/all/:registerId", retriveArtifacts);
 router.get("/artifact/:registerId/:artifactId", retrieveArtifact);
 router.get("/", registers);
 
 router.post("/addregister", addRegister);
+router.post("/delregister", delRegister);
 
 router.post("/addmember", addMember);
 router.post("/delmember", delMember);
