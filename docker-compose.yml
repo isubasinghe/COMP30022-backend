@@ -1,0 +1,31 @@
+# docker-compose.yml
+version: "3"
+services:
+  app:
+    image: isubasinghe/comp30022-backend
+    depends_on:
+      - postgres
+    environment:
+      DB_URL: postgres
+      DB_USER: postgress
+      DB_PWD: pass
+      DB_PORT: 5432
+      DB_DATABASE: postgres
+      COGNITO_ISS: https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_Jlon4B6xy
+      COGNITO_APP_CLIENT_ID: 18qa8ikoosdfeqhqqi8g4taemh
+      CLOUDINARY_URL: PRIVATE_FIELD
+      SENTRY_DSN: PRIVATE_FIELD
+      LOGDNA_INGESTION_KEY: PRIVATE_FIELD
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - "3000:3000"
+
+  postgres:
+    image: postgres:10.4
+    ports:
+      - "35432:5432"
+    environment:
+      POSTGRES_USER: postgress
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: postgres
