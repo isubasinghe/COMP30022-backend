@@ -5,8 +5,10 @@
  */
 require("dotenv").config();
 var app = require("../app");
+var wsapp = require("../wsapp");
 var debug = require("debug")("comp30022-backend:server");
 var http = require("http");
+var url = require("url");
 
 /**
  * Get port from environment and store in Express.
@@ -24,6 +26,14 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
+server.on("upgrade", (req, socket, head) => {
+  const pathname = url.parse(req.url, true).pathname;
+  if (pathname === "/ws") {
+    wsapp.handleUpgrade(req, socket, head, ws => {
+      wsapp.emit("connection", ws, req);
+    });
+  }
+});
 
 server.listen(port);
 server.on("error", onError);
