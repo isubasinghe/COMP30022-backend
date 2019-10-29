@@ -1,26 +1,56 @@
 "use strict";
 
 const updateArtifact = (req, res) => {
-  const { register_id, artifact_id, name, family_members, description, date, lat, lon } = req.body;
+  const {
+    register_id,
+    artifact_id,
+    name,
+    family_members,
+    description,
+    date,
+    lat,
+    lon
+  } = req.body;
 
-  [register_id, artifact_id, name, family_members, description, date, lat, lon]
-  .forEach(element => {
+  const exit = [
+    register_id,
+    artifact_id,
+    name,
+    family_members,
+    description,
+    date,
+    lat,
+    lon
+  ].some(element => {
     if (element === undefined) {
       res.status(400).json({ error: "incorrect schema" });
-      return;
+      return true;
     }
+    return false;
   });
 
+  if (exit) {
+    return;
+  }
+
   req.app.locals.db.artifact
-    .update(res.locals.authenticatedEmail, register_id, artifact_id, name, family_members, description, date, lat, lon)
+    .update(
+      res.locals.authenticatedEmail,
+      register_id,
+      artifact_id,
+      name,
+      family_members,
+      description,
+      date,
+      lat,
+      lon
+    )
     .then(() => {
-      res.status(200).json({ message: "successfully updated artifact"});
+      res.status(200).json({ message: "successfully updated artifact" });
     })
     .catch(err => {
-      console.log(err);
       res.status(400).json({ error: err.message });
     });
-  
 };
 
 module.exports = updateArtifact;
