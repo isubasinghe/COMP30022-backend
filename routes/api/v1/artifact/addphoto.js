@@ -33,19 +33,19 @@ const addPhoto = (req, res) => {
     }
     if (req.file.buffer === undefined || req.file.buffer === null) {
       res
-        .status(402)
+        .status(400)
         .json({ error: "multipart form with 'photo' as key was not provided" });
       return;
     }
     if (req.body.artifactId === undefined || req.body.artifactId === null) {
       res
-        .status(402)
+        .status(400)
         .json({ error: "artifactId to add a photo to must be supplied" });
       return;
     }
     if (req.body.registerId === undefined || req.body.registerId === null) {
       res
-        .status(402)
+        .status(400)
         .json({ error: "registerId to add a photo must be supplied" });
       return;
     }
@@ -54,7 +54,12 @@ const addPhoto = (req, res) => {
       artifactId = parseInt(artifactId);
       registerId = parseInt(registerId);
     } catch (err) {
-      res.status(402).json({ error: "unable to parse integer " });
+      res.status(400).json({ error: "unable to parse integer " });
+      return;
+    }
+
+    if (isNaN(artifactId) || isNaN(registerId)) {
+      res.status(400).json({ error: "unable to parse integer" });
       return;
     }
 
