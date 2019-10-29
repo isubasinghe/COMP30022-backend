@@ -12,6 +12,7 @@ const retrieveArtifact = (req, res) => {
 
   if (isNaN(artifactId) || isNaN(registerId)) {
     res.status(400).json({ error: "unable to parse integer" });
+    return;
   }
   req.app.locals.db.artifact
     .read(res.locals.authenticatedEmail, registerId, artifactId)
