@@ -28,7 +28,7 @@
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
     "sha.js": "^2.4.11",
-    "snyk": "^1.240.3"
+    "snyk": "^1.248.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.4",
