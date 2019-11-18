@@ -2613,10 +2613,10 @@ lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
-logdna@^3.3.3:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/logdna/-/logdna-3.3.3.tgz#d539c0524ea629898926fdb0027b0723f28bbdbe"
-  integrity sha512-WNPdQt4Q+R/WPFoGIHDauWh/5CpFdFdYuH6u6lrOtFrZIPL8PBUE9+H5DB8QmjlGk/3cT/YXaE+zzfPPyqFLiA==
+logdna@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/logdna/-/logdna-3.4.0.tgz#fa891b6c3fbdce90b3d0e9ac462b017dbb6e825d"
+  integrity sha512-oOWFDV9TA6w1qhP1mO3xUquwCTU/jos5/Ngv3akengnBdx2eWnQdEd3YF2Sw2YAGnQLO/R6bkaKkgey6lSijsg==
   dependencies:
     agentkeepalive "^2.2.0"
     axios "^0.19.0"
