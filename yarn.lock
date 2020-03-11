@@ -796,10 +796,10 @@ clone-deep@^0.3.0:
     kind-of "^3.2.2"
     shallow-clone "^0.1.2"
 
-cloudinary@^1.16.0:
-  version "1.16.0"
-  resolved "https://registry.yarnpkg.com/cloudinary/-/cloudinary-1.16.0.tgz#d2254a04fc0cacf3cae4ec8fce2005c82e6dc78a"
-  integrity sha512-Tna7JsQ9Drssn/Su3AcTzozDuqMFlY5bIj/476AJMechquxeOEcLF0z5ucUtkAd1N3tR9ndLvVszz7anG6Zp4Q==
+cloudinary@^1.20.0:
+  version "1.20.0"
+  resolved "https://registry.yarnpkg.com/cloudinary/-/cloudinary-1.20.0.tgz#88f3964be91cc9808b5c7834bf06e03d22954636"
+  integrity sha512-/e76lEr5PS5gefvWUJ2Ou90zuEQCc0agTq8hrx2uxfFhUGlzEQ9mPPcwAeHFY1gj9caq0iHLuvTDvBbLSRhX9w==
   dependencies:
     lodash "^4.17.11"
     q "^1.5.1"
