@@ -9,7 +9,7 @@
     "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
-    "@sentry/node": "^5.15.5",
+    "@sentry/node": "^5.16.0",
     "cloudinary": "^1.16.0",
     "cookie-parser": "~1.4.5",
     "cors": "^2.8.5",
